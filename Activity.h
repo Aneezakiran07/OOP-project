@@ -7,7 +7,7 @@
 #include"Activity.h"
 #include"Comment.h"
 
-#include "Pages.h" // Include necessary headers for other classes used in FaceBook.h
+#include "Pages.h" 
 #include "Users.h"
 #include "Post.h"
 #include "Date.h"
