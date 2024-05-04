@@ -31,12 +31,12 @@ public:
     Pages();
     ~Pages();
 
-    void ReadDataFromFile(ifstream& inp);
+    void ReadData(ifstream& inp);
     void display_home() override;
     void add_postTo_timeline(Post* ptr);
     void CheckDate(Date CurrentDate, bool memory);
     void display() override;
-    void viewTimeline();
+    void view_timeline();
     char* GetterForId();
 };
 

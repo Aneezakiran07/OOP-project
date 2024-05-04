@@ -22,7 +22,7 @@ private:
     char* text;
     Date sharedDate;
     BASE_CLASS* sharedBy;
-    BASE_CLASS** LikedBy;
+    BASE_CLASS** liked_post_by;
     Comment** comments;
     Activity* activity;
 
@@ -36,7 +36,7 @@ public:
     Post(const char* txt, BASE_CLASS* SharedBy, Date currentDate);
     Post();
 
-    void ReadDataFromFile(std::ifstream& inp);
+    void readData(std::ifstream& inp);
     void SetSharedBy(BASE_CLASS* ptr);
     void SetLikedBy(BASE_CLASS* ptr);
     void AddComment(Comment* ptr);
