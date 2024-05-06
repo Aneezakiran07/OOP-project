@@ -37,6 +37,18 @@ void Post::SetSharedBy(BASE_CLASS* ptr) {
 
 void Post::SetLikedBy(BASE_CLASS* ptr) {
 
+    if (totalLikedBy == 0) {
+        liked_post_by = new BASE_CLASS * [10];
+        for (int i = 0; i < 10; i++) {
+            liked_post_by[i] = nullptr;
+        }
+        liked_post_by[totalLikedBy] = ptr;
+        totalLikedBy++;
+    }
+    else {
+        liked_post_by[totalLikedBy] = ptr;
+        totalLikedBy++;
+    }
 }
 
 void Post::AddComment(Comment* comment_ptr) {
@@ -56,7 +68,7 @@ void Post::AddComment(Comment* comment_ptr) {
 }
 
 bool Post::CompareDate(Date currentDate, bool Memory) {
-    if (currentDate.compare(sharedDate,Memory)) {
+    if (currentDate.compareyear_mem(sharedDate,Memory)) {
         return 1;
     }
     else {
@@ -73,11 +85,38 @@ char* Post::GetId() {
 }
 
 void Post::Print(bool& flag) {
-
+    sharedBy->display_home();
+    cout << " ";
+    if (activity != 0) {
+        activity->Print();
+    }
+    cout << endl;
+    cout << "\"" << text << "\"";
+    cout << " (";
+    sharedDate.display();
+    cout << ") " << endl << "\t";
+    for (int i = 0; i < totalComment; i++) {
+        comments[i]->Print();
+        cout << "\t";
+    }
+    cout << endl;
 }
 
 void Post::Print() {
-
+    sharedBy->display_home();
+    cout << " ";
+    if (activity != 0) {
+        activity->Print();
+    }
+    cout << endl;
+    cout << "\"" << text << "\"";
+    cout << " (";
+    cout << ") " << endl << "\t";
+    for (int i = 0; i < totalComment; i++) {
+        comments[i]->Print();
+        cout << "\t";
+    }
+    cout << endl;
 }
 
 void Post::ViewLikedList() {
@@ -125,7 +164,9 @@ Memory::~Memory() {
 }
 
 void Memory::Print(bool& flag) {
-
+    cout << "Shared a memory (" << Date::difYear(Original->GetSharedDate(), GetSharedDate()) << " years) ago" << endl;
+    Original->Print(flag);
+    flag = true;
 }
 
 Post* Memory::GetOriginalPost() {

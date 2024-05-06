@@ -42,7 +42,7 @@ void Facebook::LoadPages(string filename) {
         for (int i = 0; i < totalPages; i++)
         {
             pages[i] = new Pages;
-            pages[i]->ReadDataFromFile(input);
+            pages[i]->ReadData(input);
         }
 
         input.close();
@@ -85,7 +85,7 @@ void Facebook::LoadUsers(string filename) {
             Pages* pointer;
             for (int j = 0; j < 10; j++)
             {
-                inp >> temp;
+                input >> temp;
                 if (Helper::compareString(temp, "-1"))
                 {
                     break;
@@ -130,7 +130,7 @@ void Facebook::LoadUsers(string filename) {
 
         }
 
-        inp.close();
+        input.close();
 
         if (friendList)
         {
@@ -152,7 +152,7 @@ void Facebook::LoadPosts(string filename) {
 
         for (int i = 0; i < totalPosts; i++) {
             posts[i] = new Post;
-            posts[i]->ReadDataFromFile(inp);
+            posts[i]->readData(inp);
 
             inp >> temp;
 

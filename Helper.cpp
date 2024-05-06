@@ -5,7 +5,7 @@ using namespace std;
 
 int Helper::strLen(const char* str)
 {
-    nt size = 0;
+    int size = 0;
     for (int i = 0; str[i] != '\0'; i++)
     {
         size++;
