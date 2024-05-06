@@ -51,6 +51,17 @@ public:
     Users* GetUserFromId(const char* str);
     Pages* GetPageFromId(char* str);
 
+    void ViewFriendList(Users* currentUser);
+    void ViewLikedPages(Users* currentUser);
+    void ViewHome(Users* currentUser, Date currentDate);
+    void ViewTimeline(Users* currentUser);
+    void ViewLikedList(char* str);
+    void LikePost(Users* currentUser, char* post);
+    void AddComment(Users* CurrentUser, char* post, char* txt);
+    void ViewPost(char* post);
+    void ViewMemory(Users* currentUser, Date CurrentDate);
+    void ShareMemory(Users* currentUSer, char* originalPostId, char* txt, Date currentDate);
+    void ViewPage(char* pageName);
 
     void Load();
     void Run(char* str);

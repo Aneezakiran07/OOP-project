@@ -252,54 +252,133 @@ Post* Facebook::GetPostById(char* str)
 
 void Facebook::ViewFriendList(Users* currentUser)
 {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tViewFriendList" << std::endl;
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
 
+    currentUser->friend_list_view();
 }
 
 void Facebook::ViewLikedPages(Users* currentUser)
 {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tViewLikedPages" << std::endl;
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+
+    currentUser->liked_pages_view();
 }
 
 void Facebook::ViewHome(Users* currentUser, Date currentDate)
 {
 
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tViewHome" << std::endl;
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+
+    currentUser->HomePage(currentDate);
 }
 
 
-void Facebook::ViewTimeline(Users* currentUser)
-{
+void Facebook::ViewTimeline(Users* currentUser) {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tViewTimeline" << std::endl;
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+
+    currentUser->timeline_vieww();
 }
 
-void Facebook::ViewLikedList(char* str)
-{
+void Facebook::ViewLikedList(char* str) {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tViewLikedList(" << str << ")" << std::endl;
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
 
+    Post* post = GetPostById(str);
+    if (post != nullptr) {
+        post->ViewLikedList();
+    }
+    else {
+        cout << "Error: Post with ID \"" << str << "\" not found." << std::endl;
+    }
 }
 
+void Facebook::LikePost(Users* currentUser, char* post) {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tLikePost(" << post << ")" << std::endl;
 
-void Facebook::LikePost(Users* currentUser, char* post)
-{
-
+    Post* postToLike = GetPostById(post);
+    if (postToLike != nullptr) {
+        currentUser->LikePost(postToLike);
+    }
+    else {
+        cout << "Error: Post with ID \"" << post << "\" not found." << endl;
+    }
 }
 
-void Facebook::AddComment(Users* CurrentUser, char* post, char* txt)
-{
+void Facebook::AddComment(Users* CurrentUser, char* post, char* txt) {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tPostComment(" << post << " , " << txt << ")" << endl;
 
+    Post* currentPost = GetPostById(post);
+    if (currentPost != nullptr) {
+        Comment* newComment = new Comment(CurrentUser, txt);
+        currentPost->AddComment(newComment);
+    }
+    else {
+        cout << "Error: Post with ID \"" << post << "\" not found." << endl;
+    }
 }
 
-void Facebook::ViewPost(char* post)
-{
+void Facebook::ViewPost(char* post) {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tViewPost(" << post << ")" << endl;
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
 
+    bool temp = false;
+    Post* currentPost = GetPostById(post);
+    if (currentPost != nullptr) {
+        currentPost->Print(temp);
+    }
+    else {
+        cout << "Error: Post with ID \"" << post << "\" not found." << endl;
+    }
 }
 
-void Facebook::ViewMemory(Users* currentUser, Date CurrentDate)
-{
+void Facebook::ViewMemory(Users* currentUser, Date CurrentDate) {
+    cout << "------------------------------------------------------------------------------------------------" << endl;
+    cout << "Command\tSeeYourMemory()" << endl;
+    cout << "------------------------------------------------------------------------------------------------" << endl;
+
+    currentUser->seeMemoryforDate(CurrentDate);
 }
 
 void Facebook::ShareMemory(Users* currentUser, char* originalPostId, char* txt, Date currentDate) {
+    cout << "------------------------------------------------------------------------------------------------" << endl;
+    cout << "Command\tShareMemory(" << originalPostId << "," << "\"" << txt << "\")" << endl;
 
+    Post* originalPost = GetPostById(originalPostId);
+    if (originalPost != nullptr) {
+        Memory* newPostPtr = new Memory(originalPost, txt, currentUser, currentDate);
+        currentUser->add_postTo_timeline(newPostPtr);
+    }
+    else {
+        cout << "Error: Post with ID \"" << originalPostId << "\" not found." << endl;
+    }
 }
 
 void Facebook::ViewPage(char* pageName) {
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
+    cout << "Command\tViewPage(" << pageName << ")" << endl;
+    cout << "------------------------------------------------------------------------------------------------" << std::endl;
 
+    Pages* currentPage = GetPageFromId(pageName);
+    if (currentPage != nullptr) {
+        currentPage->display_home();
+        cout << endl;
+        currentPage->view_timeline();
+    }
+    else {
+        cout << "Error: Page with name \"" << pageName << "\" not found." << endl;
+    }
 }
 
 void Facebook::Load() {
