@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Comment::Comment(BASE_CLASS* CurrentUser, char* txt) 
+Comment::Comment(BASE_CLASS* CurrentUser, char* txt)
 {
     char* IdForNewComment = Helper::Int_str_concatenation("c", TotalComments + 1);
     Text = txt;
@@ -19,7 +19,7 @@ Comment::~Comment()
     delete[] Id;
 }
 
-void Comment::SetValues(char* idStr, char* textStr, BASE_CLASS* commentByPtr) 
+void Comment::SetValues(char* idStr, char* textStr, BASE_CLASS* commentByPtr)
 {
     commentPostedBy = commentByPtr;
     Helper::strcpy(textStr, Text);

@@ -23,4 +23,4 @@ public:
     virtual void add_postTo_timeline(Post* ptr);
 };
 
-#endif 
+#endif // OBJECT_H

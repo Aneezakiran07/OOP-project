@@ -389,7 +389,39 @@ void Facebook::Load() {
 }
 
 void Facebook::Run(char* str) {
+    Load();
+    Users* currentUser = GetUserFromId(str);
+    Date::CurrentDate.SetterofData(15, 11, 2017);
 
+    PrintUser(str);
+    ViewFriendList(currentUser);
+    ViewLikedPages(currentUser);
+
+    ViewHome(currentUser, Date::CurrentDate);
+    ViewTimeline(currentUser);
+    ViewLikedList((char*)"post5");
+
+    // LikePost(Post5)
+    LikePost(currentUser, (char*)"post5");
+    ViewLikedList((char*)"post5");
+
+    // Add comment
+    ViewPost((char*)"post4");
+    AddComment(currentUser, (char*)"post4", (char*)"My Best Wishes.");
+    ViewPost((char*)"post4");
+
+    ViewPost((char*)"post8");
+    AddComment(currentUser, (char*)"post8", (char*)"Thanks for the wishes.");
+    ViewPost((char*)"post8");
+
+    // View memory
+    ViewMemory(currentUser, Date::CurrentDate);
+
+    // Share memory
+    ShareMemory(currentUser, (char*)"post10", (char*)"Never thought I will be specialist in this field", Date::CurrentDate);
+    ViewTimeline(currentUser);
+
+    ViewPage((char*)"p1");
 }
 
 int Facebook::totalUsers = 0;

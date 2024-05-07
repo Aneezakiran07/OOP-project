@@ -5,8 +5,7 @@
 int main()
 {
 	Facebook obj;
-	obj.Run((char*)"u11");
-	cout << "S";
+	obj.Run((char*)"u7");
 	system("pause");
 }
 
