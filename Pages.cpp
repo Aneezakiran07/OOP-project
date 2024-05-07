@@ -32,7 +32,18 @@ void Pages::display_home() {
 }
 
 void Pages::add_postTo_timeline(Post* ptr) {
-
+    if (total_timeline == 0) {
+        timeline = new Post * [10];
+        for (int i = 0; i < 10; i++) {
+            timeline[i] = nullptr;
+        }
+        timeline[total_timeline] = ptr;
+        total_timeline++;
+    }
+    else {
+        timeline[total_timeline] = ptr;
+        total_timeline++;
+    }
 }
 
 void Pages::CheckDate(Date CurrentDate, bool memory) {

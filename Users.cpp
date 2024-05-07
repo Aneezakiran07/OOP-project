@@ -38,7 +38,14 @@ void Users::ReadDataFromFile(ifstream& inp) {
 }
 
 void Users::SetPage(Pages* ptr) {
-
+    if (numPages == 0) {
+        Liked_pages = new Pages * [10];
+        for (int i = 0; i < 10; i++) {
+            Liked_pages[i] = nullptr;
+        }
+    }
+    Liked_pages[numPages] = ptr;
+    numPages++;
 }
 
 void Users::CheckDate(Date CurrentDate, bool isMemory) {
@@ -55,10 +62,34 @@ void Users::LikePost(Post* post) {
 }
 
 void Users::HomePage(Date currentDate) {
+    cout << "---------------------------------------------------------------------------" << endl;
+    if (Friend_list != nullptr) {
+        for (int i = 0; i < numFriends; i++) {
+            Friend_list[i]->CheckDate(currentDate, false);
+        }
+    }
 
+    if (Liked_pages != nullptr) {
+        for (int i = 0; i < numPages; i++) {
+            Liked_pages[i]->CheckDate(currentDate, false);
+        }
+    }
+    cout << endl;
 }
 
 void Users::timeline_vieww() {
+    if (timeline != nullptr) {
+        cout << "------------------------------------------------------------------------------" << endl;
+        for (int i = 0; i < totalTimeline; i++) {
+            if (timeline[i] != nullptr) {
+                bool IsNewPost = false;
+                timeline[i]->Print(IsNewPost);
+                if (IsNewPost) {
+                    timeline[i]->Print();
+                }
+            }
+        }
+    }
 }
 
 void Users::seeMemoryforDate(Date currentDate) {
@@ -89,12 +120,23 @@ void Users::SetFriend(Users* ptr) {
 }
 
 void Users::add_postTo_timeline(Post* ptr) {
-
+    if (totalTimeline == 0) {
+        timeline = new Post * [10];
+        for (int i = 0; i < 10; i++) {
+            timeline[i] = nullptr;
+        }
+        timeline[totalTimeline] = ptr;
+        totalTimeline++;
+    }
+    else {
+        timeline[totalTimeline] = ptr;
+        totalTimeline++;
+    }
 }
 
 void Users::friend_list_view() {
     if (Friend_list != nullptr) {
-       // cout << "- " << endl;
+        cout << "--------------------------------- Friend List ---------------------------------" << endl;
         for (int i = 0; i < numFriends; i++) {
             Friend_list[i]->Print();
         }
@@ -103,7 +145,7 @@ void Users::friend_list_view() {
 
 void Users::liked_pages_view() {
     if (Liked_pages != nullptr) {
-      //  cout << "---" << endl;
+        cout << "--------------------------------- Liked Pages ---------------------------------" << endl;
         for (int i = 0; i < numPages; i++) {
             Liked_pages[i]->display();
         }
