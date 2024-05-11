@@ -14,7 +14,7 @@ private:
 public:
 
     Date(int x = 0, int y = 0, int z = 0);
-    void ReadDataFromFile(ifstream& inp);
+    void readData(ifstream& input);
     bool compareyear_mem(const Date& rhs, bool memory);
     void display();
     void SetterofData(int d, int m, int y);
@@ -22,4 +22,4 @@ public:
     static Date CurrentDate;
 };
 
-#endif // DATE_H
+#endif 

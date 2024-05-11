@@ -1,6 +1,7 @@
 #include "Activity.h"
 using namespace std;
-Activity::Activity() {
+Activity::Activity()
+{
     type = 0;
     value = nullptr;
 }
@@ -9,28 +10,28 @@ Activity::~Activity() {
     delete[] value;
 }
 
-void Activity::Print() {
+void Activity::display() {
     if (type == 1) {
-        cout << "feeling " << value;
+        cout << "Feeling " << value;
     }
     else if (type == 2) {
-        cout << "thinking about " << value;
+        cout << "Thinking about " << value;
     }
     else if (type == 3) {
         cout << "Making " << value;
     }
     else if (type == 4) {
-        cout << "celebrating " << value;
+        cout << "Celebrating " << value;
     }
 }
 
-void Activity::ReadDataFromFile(ifstream& inp) {
+void Activity::readData(ifstream& input) {
     char temp[100];
-    inp >> type;
-    inp.getline(temp, 100);
+    input >> type;
+    input.getline(temp, 100);
     Helper::strcpy(temp, value);
 }
 
-void Activity::SetValue(char* text) {
+void Activity::setValue(char* text) {
     Helper::strcpy(text, value);
 }

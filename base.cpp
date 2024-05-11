@@ -26,9 +26,9 @@ void BASE_CLASS::display() {
 }
 
 void BASE_CLASS::display_home() {
-    std::cout << "Error	Not Found!!!!!!!!" << std::endl;
+    cout << "Error Not Found!!!" << endl;
 }
 
 void BASE_CLASS::add_postTo_timeline(Post* ptr) {
-    std::cout << "Error	Not Found!!!!!!!!" << std::endl;
+    cout << "Error Not Found!!!" << endl;
 }

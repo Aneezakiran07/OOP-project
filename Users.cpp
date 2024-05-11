@@ -25,7 +25,7 @@ Users::~Users() {
         delete[] timeline;
 }
 
-void Users::ReadDataFromFile(ifstream& inp) {
+void Users::readData(ifstream& inp) {
     char temp[50];
     inp >> temp;
     char* ptr;
@@ -62,7 +62,7 @@ void Users::LikePost(Post* post) {
 }
 
 void Users::HomePage(Date currentDate) {
-    cout << "---------------------------------------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
     if (Friend_list != nullptr) {
         for (int i = 0; i < numFriends; i++) {
             Friend_list[i]->CheckDate(currentDate, false);
@@ -79,7 +79,7 @@ void Users::HomePage(Date currentDate) {
 
 void Users::timeline_vieww() {
     if (timeline != nullptr) {
-        cout << "------------------------------------------------------------------------------" << endl;
+        cout << "----------------------------------------------------------------------------" << endl;
         for (int i = 0; i < totalTimeline; i++) {
             if (timeline[i] != nullptr) {
                 bool IsNewPost = false;
@@ -136,7 +136,7 @@ void Users::add_postTo_timeline(Post* ptr) {
 
 void Users::friend_list_view() {
     if (Friend_list != nullptr) {
-        cout << "--------------------------------- Friend List ---------------------------------" << endl;
+        cout << "------------------------------- Friend List -------------------------------" << endl;
         for (int i = 0; i < numFriends; i++) {
             Friend_list[i]->Print();
         }
@@ -145,7 +145,7 @@ void Users::friend_list_view() {
 
 void Users::liked_pages_view() {
     if (Liked_pages != nullptr) {
-        cout << "--------------------------------- Liked Pages ---------------------------------" << endl;
+        cout << "------------------------------- Liked Pages -------------------------------" << endl;
         for (int i = 0; i < numPages; i++) {
             Liked_pages[i]->display();
         }

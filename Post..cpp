@@ -1,6 +1,5 @@
 #include "Post.h"
 //#include "Memory.h"
-
 #include <iostream>
 
 using namespace std;
@@ -9,70 +8,67 @@ int Post::TotalPosts = 0;
 
 Post::~Post() {
     delete[] Id;
-    delete activity;
     delete[] text;
-    if (liked_post_by != nullptr)
-        delete[] liked_post_by;
+    if (LikedBy != nullptr)
+        delete[] LikedBy;
     if (comments != nullptr)
         delete[] comments;
-  
+    delete activity;
 }
 
-Post::Post(const char* txt, BASE_CLASS* SharedBy, Date currentDate) : Id(nullptr), sharedBy(nullptr),  text(nullptr) ,liked_post_by(nullptr), comments(nullptr), activity(nullptr), totalLikedBy(0), totalComment(0) {
+Post::Post(const char* txt, BASE_CLASS* SharedBy, Date currentDate) : Id(nullptr), text(nullptr), sharedBy(nullptr), LikedBy(nullptr), comments(nullptr), activity(nullptr), totalLikedBy(0), totalComment(0) {
     activity = nullptr;
     char* IdForNewPost = Helper::Int_str_concatenation("post", TotalPosts + 1);
     Helper::strcpy(IdForNewPost, Id);
     Helper::strcpy(txt, text);
     sharedBy = SharedBy;
     sharedDate = currentDate;
-    totalLikedBy = 0;
     totalComment = 0;
+    totalLikedBy = 0;
 }
 
-Post::Post() : Id(nullptr), text(nullptr), sharedBy(nullptr), liked_post_by(nullptr), comments(nullptr), activity(nullptr), totalLikedBy(0), totalComment(0) {}
+Post::Post() : Id(nullptr), text(nullptr), sharedBy(nullptr), LikedBy(nullptr), comments(nullptr), activity(nullptr), totalLikedBy(0), totalComment(0) {}
 
 void Post::SetSharedBy(BASE_CLASS* ptr) {
     sharedBy = ptr;
 }
 
 void Post::SetLikedBy(BASE_CLASS* ptr) {
-
     if (totalLikedBy == 0) {
-        liked_post_by = new BASE_CLASS * [10];
+        LikedBy = new BASE_CLASS * [10];
         for (int i = 0; i < 10; i++) {
-            liked_post_by[i] = nullptr;
+            LikedBy[i] = nullptr;
         }
-        liked_post_by[totalLikedBy] = ptr;
+        LikedBy[totalLikedBy] = ptr;
         totalLikedBy++;
     }
     else {
-        liked_post_by[totalLikedBy] = ptr;
+        LikedBy[totalLikedBy] = ptr;
         totalLikedBy++;
     }
 }
 
-void Post::AddComment(Comment* comment_ptr) {
-    int maxcomment = 10;
+void Post::AddComment(Comment* ptr) {
     if (totalComment == 0) {
-        comments = new Comment * [maxcomment];
-        for (int i = 0; i < maxcomment ; i++) {
+        comments = new Comment * [10];
+        for (int i = 0; i < 10; i++) {
             comments[i] = nullptr;
         }
-        comments[totalComment] = comment_ptr;
+        comments[totalComment] = ptr;
         totalComment++;
     }
     else {
-        comments[totalComment] = comment_ptr;
+        comments[totalComment] = ptr;
         totalComment++;
     }
 }
 
-bool Post::CompareDate(Date currentDate, bool Memory) {
-    if (currentDate.compareyear_mem(sharedDate,Memory)) {
-        return 1;
+bool Post::CompareDate(Date currentDate, bool isMemory) {
+    if (currentDate.compareyear_mem(sharedDate, isMemory)) {
+        return true;
     }
     else {
-        return 0;
+        return false;
     }
 }
 
@@ -88,7 +84,7 @@ void Post::Print(bool& flag) {
     sharedBy->display_home();
     cout << " ";
     if (activity != 0) {
-        activity->Print();
+        activity->display();
     }
     cout << endl;
     cout << "\"" << text << "\"";
@@ -96,7 +92,7 @@ void Post::Print(bool& flag) {
     sharedDate.display();
     cout << ") " << endl << "\t";
     for (int i = 0; i < totalComment; i++) {
-        comments[i]->Print();
+        comments[i]->display();
         cout << "\t";
     }
     cout << endl;
@@ -106,24 +102,24 @@ void Post::Print() {
     sharedBy->display_home();
     cout << " ";
     if (activity != 0) {
-        activity->Print();
+        activity->display();
     }
     cout << endl;
     cout << "\"" << text << "\"";
     cout << " (";
     cout << ") " << endl << "\t";
     for (int i = 0; i < totalComment; i++) {
-        comments[i]->Print();
+        comments[i]->display();
         cout << "\t";
     }
     cout << endl;
 }
 
 void Post::ViewLikedList() {
-    if (liked_post_by != 0) {
-        
+    if (LikedBy != 0) {
+        cout << "-----------------------------------------------------------------------------------------" << endl;
         for (int i = 0; i < totalLikedBy; i++) {
-            liked_post_by[i]->display();
+            LikedBy[i]->display();
             cout << endl;
         }
     }
@@ -132,7 +128,7 @@ int Post::GetTotalPosts()
 {
     return TotalPosts;
 }
-void Post::readData(ifstream& inp)
+void Post::ReadDataFromFile(ifstream& inp)
 {
     int activityId = 0;
     inp >> activityId;
@@ -141,7 +137,7 @@ void Post::readData(ifstream& inp)
 
     Helper::strcpy(temp, Id);
 
-    sharedDate.ReadDataFromFile(inp);
+    sharedDate.readData(inp);
     //  cout << "HI" << endl;
     inp.ignore();
 
@@ -150,7 +146,7 @@ void Post::readData(ifstream& inp)
     if (activityId == 2)
     {
         activity = new Activity;
-        activity->ReadDataFromFile(inp);
+        activity->readData(inp);
     }
     TotalPosts++;
 }

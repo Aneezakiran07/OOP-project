@@ -5,19 +5,19 @@ using namespace std;
 
 Date::Date(int x, int y, int z) : day(x), month(y), year(z) {}
 
-void Date::ReadDataFromFile(ifstream& inp)
+void Date::readData(ifstream& inp)
 {
     inp >> day;
     inp >> month;
     inp >> year;
 }
 
-bool Date::compareyear_mem(const Date& y2, bool isMemory) {
-    if (y2.year != !isMemory && year) {
+bool Date::compareyear_mem(const Date& rhs, bool isMemory) {
+    if (!isMemory && year != rhs.year) {
         return false;
     }
-    else if (month == y2.month) {
-        if (day == y2.day || day + 1 == y2.day || day - 1 == y2.day) {
+    else if (month == rhs.month) {
+        if (day == rhs.day || day + 1 == rhs.day || day - 1 == rhs.day) {
             return true;
         }
         else {
@@ -30,17 +30,17 @@ bool Date::compareyear_mem(const Date& y2, bool isMemory) {
 }
 
 int Date::difYear(Date lhs, Date rhs) {
-    int result = lhs.year - rhs.year;
-    return (result < 0) ? -result : result;
+    int ans = lhs.year - rhs.year;
+    return (ans < 0) ? -ans : ans;
 }
 
 void Date::display() {
-    cout << day << "/" << month << "/" << year;
+    std::cout << day << "/" << month << "/" << year;
 }
 
 void Date::SetterofData(int d, int m, int y) {
-    month = m;
     day = d;
+    month = m;
     year = y;
 }
 

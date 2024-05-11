@@ -31,7 +31,7 @@ public:
     ~Comment();
 
     void SetValues(char* id, char* text, BASE_CLASS* commentPostedByPtr);
-    void Print();
+    void display();
 };
 
-#endif // COMMENT_H
+#endif 

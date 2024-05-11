@@ -1,29 +1,26 @@
 #include "Pages.h"
 using namespace std;
 
-Pages::Pages()
-{
+Pages::Pages() {
     title = nullptr;
-    total_timeline = 0;
     timeline = nullptr;
+    total_timeline = 0;
 }
 
-Pages::~Pages() 
-{
+Pages::~Pages() {
     delete[] title;
     if (timeline != nullptr)
         delete[] timeline;
 }
 
-void Pages::ReadData(ifstream& inp) 
-{
-    char temp[100];
+void Pages::ReadData(ifstream& inp) {
+    char temp[50];
     inp >> temp;
     char* ptr;
     Helper::strcpy(temp, ptr);
     SetterforId(ptr);
     inp.ignore();
-    inp.getline(temp, 100, '\n');
+    inp.getline(temp, 50, '\n');
     Helper::strcpy(temp, title);
 }
 
@@ -46,10 +43,10 @@ void Pages::add_postTo_timeline(Post* ptr) {
     }
 }
 
-void Pages::CheckDate(Date CurrentDate, bool memory) {
+void Pages::CheckDate(Date CurrentDate, bool isMemory) {
     bool temp = false;
     for (int i = 0; i < total_timeline; i++) {
-        if (timeline[i]->CompareDate(CurrentDate, memory)) {
+        if (timeline[i]->CompareDate(CurrentDate, isMemory)) {
             timeline[i]->Print(temp);
         }
     }

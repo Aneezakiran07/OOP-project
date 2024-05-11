@@ -14,7 +14,7 @@
 #include "Helper.h"
 #include <fstream>
 #include <iostream>
-#include "Base.h"x
+#include "Base.h"
 
 #include<string>
 using namespace std;
@@ -28,9 +28,9 @@ private:
 public:
     Activity();
     ~Activity();
-    void ReadDataFromFile(ifstream& inp);
-    void SetValue(char* text);
-    void Print();
+    void readData(ifstream& input);
+    void setValue(char* text);
+    void display();
 };
 
 #endif 

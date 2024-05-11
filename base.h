@@ -1,8 +1,6 @@
 #ifndef BASECLASS_H
 #define BASECLASS_H
 
-//#include"Post.h"
-
 #include<string>
 using namespace std;
 
@@ -23,4 +21,4 @@ public:
     virtual void add_postTo_timeline(Post* ptr);
 };
 
-#endif // OBJECT_H
+#endif

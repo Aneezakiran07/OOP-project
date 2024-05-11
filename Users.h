@@ -1,16 +1,8 @@
 #ifndef USERS_H
 #define USERS_H
 
-//#include"Facebook.h"
-//#include"Memory.h"
-//#include"Activity.h"
-//#include"Comment.h"
-
-#include "Pages.h" // Include necessary headers for other classes used in FaceBook.h
-//#include "Users.h"
-//#include "Post.h"
+#include "Pages.h" 
 #include "Date.h"
-//#include "Helper.h"
 #include <fstream>
 #include <iostream>
 #include "Base.h"
@@ -41,7 +33,7 @@ public:
     Users();
     ~Users();
 
-    void ReadDataFromFile(ifstream& inp);
+    void readData(ifstream& inp);
     void SetPage(Pages* ptr);
 
     void CheckDate(Date CurrentDate, bool isMemory);

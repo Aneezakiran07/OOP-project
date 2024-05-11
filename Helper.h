@@ -4,7 +4,7 @@
 #include<string>
 using namespace std;
 
-class Helper {// helper so i wont have to make global functions
+class Helper {
 public:
     static int strLen(const char* str);
     static void strcpy(const char* temp, char*& str);
@@ -12,4 +12,4 @@ public:
     static char* Int_str_concatenation(const char* string, int num);
 };
 
-#endif // HELPER_H
+#endif 

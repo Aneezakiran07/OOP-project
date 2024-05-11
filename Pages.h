@@ -7,7 +7,7 @@
 #include"Activity.h"
 #include"Comment.h"
 
-#include "Pages.h" // Include necessary headers for other classes used in FaceBook.h
+#include "Pages.h" 
 #include "Users.h"
 #include "Post.h"
 #include "Date.h"
@@ -22,7 +22,7 @@ using namespace std;
 class BASE_CLASS;
 class Post;
 
-class Pages : public BASE_CLASS  {
+class Pages : public BASE_CLASS {
     char* title;
     Post** timeline;
     int total_timeline;
@@ -40,4 +40,4 @@ public:
     char* GetterForId();
 };
 
-#endif // PAGES_H
+#endif 

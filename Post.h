@@ -1,7 +1,7 @@
 #ifndef POST_H
 #define POST_H
 
-#include "Pages.h" // Include necessary headers for other classes used in FaceBook.h
+#include "Pages.h" 
 #include "Users.h"
 #include "Post.h"
 #include "Comment.h"
@@ -9,9 +9,9 @@
 #include "Helper.h"
 #include <fstream>
 #include <iostream>
-#include "Date.h" // Include Date.h for Date class used in Post.h
+#include "Date.h" 
 
-class BASE_CLASS; // Forward declaration of Object
+class BASE_CLASS;
 class Activity;
 class Comment;
 
@@ -22,7 +22,7 @@ private:
     char* text;
     Date sharedDate;
     BASE_CLASS* sharedBy;
-    BASE_CLASS** liked_post_by;
+    BASE_CLASS** LikedBy;
     Comment** comments;
     Activity* activity;
 
@@ -36,7 +36,7 @@ public:
     Post(const char* txt, BASE_CLASS* SharedBy, Date currentDate);
     Post();
 
-    void readData(std::ifstream& inp);
+    void ReadDataFromFile(std::ifstream& inp);
     void SetSharedBy(BASE_CLASS* ptr);
     void SetLikedBy(BASE_CLASS* ptr);
     void AddComment(Comment* ptr);
