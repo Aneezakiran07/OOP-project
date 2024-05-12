@@ -141,6 +141,10 @@ void Users::friend_list_view() {
             Friend_list[i]->Print();
         }
     }
+      else
+  {
+      cout << "--------------------------This user has no Timeline to view : ) --------------------------" << endl;
+  }
 }
 
 void Users::liked_pages_view() {
@@ -150,6 +154,10 @@ void Users::liked_pages_view() {
             Liked_pages[i]->display();
         }
     }
+      else
+  {
+      cout << "--------------------------This user has no Timeline to view : ) --------------------------" << endl;
+  }
 }
 
 void Users::Print() {
