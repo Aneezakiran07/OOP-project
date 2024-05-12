@@ -90,6 +90,10 @@ void Users::timeline_vieww() {
             }
         }
     }
+     else
+ {
+     cout << "--------------------------This user has no Timeline to view : ) --------------------------" << endl;
+ }
 }
 
 void Users::seeMemoryforDate(Date currentDate) {
@@ -99,6 +103,10 @@ void Users::seeMemoryforDate(Date currentDate) {
             if (timeline[i]->CompareDate(currentDate, true)) {
                 timeline[i]->Print(temp);
             }
+             else
+ {
+     cout << "--------------------------This user has no Memory to view : ) --------------------------" << endl;
+ }
         }
     }
 }
